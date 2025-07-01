@@ -89,71 +89,65 @@ class _CalculatorHomeState extends State<CalculatorHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                padding: const EdgeInsets.all(24),
-                alignment: Alignment.bottomRight,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      input,
-                      style:
-                          const TextStyle(fontSize: 32, color: Colors.white70),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      result,
-                      style: const TextStyle(fontSize: 48, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 5,
-              child: Container(
-                color: Colors.grey[900],
-                child: GridView.builder(
-                  itemCount: buttons.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 1.2,
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              alignment: Alignment.bottomRight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    input,
+                    style: const TextStyle(fontSize: 32, color: Colors.white70),
                   ),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ElevatedButton(
-                        onPressed: () => buttonPressed(buttons[index]),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: isOperator(buttons[index])
-                              ? Colors.blueAccent
-                              : Colors.grey[800],
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          padding: const EdgeInsets.all(16),
-                        ),
-                        child: Text(
-                          buttons[index],
-                          style: const TextStyle(
-                            fontSize: 24,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                  const SizedBox(height: 16),
+                  Text(
+                    result,
+                    style: const TextStyle(fontSize: 48, color: Colors.white),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Container(
+            color: Colors.grey[900],
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: buttons.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 1.2,
+              ),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () => buttonPressed(buttons[index]),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isOperator(buttons[index])
+                          ? Colors.blueAccent
+                          : Colors.grey[800],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                    ),
+                    child: Text(
+                      buttons[index],
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
